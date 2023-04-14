@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
+require("dotenv").config();
 
-const PORT = 3001;
+const PORT = process.env.PORT;
 //Handlebars
 app.set("view engine", "hbs");
 hbs.registerPartials(__dirname + "/views/partials");
@@ -22,11 +23,17 @@ app.get("/hola-mundo", (req, res) => {
 });
 
 app.get("/generic", (req, res) => {
-  res.sendFile(__dirname + "/public/templated-roadtrip/generic.html");
+  res.render("generic", {
+    name: "Piero Davila",
+    titulo: "Curso de NODEJS",
+  });
 });
 
-app.get("/element", (req, res) => {
-  res.sendFile(__dirname + "/public/templated-roadtrip/elements.html");
+app.get("/elements", (req, res) => {
+  res.render("elements", {
+    name: "Piero Davila",
+    titulo: "Curso de NODEJS",
+  });
 });
 
 app.get("*", (req, res) => {
